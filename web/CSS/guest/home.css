@@ -1,0 +1,123 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Feb 17, 2025, 1:34:39 PM
+    Author     : Dinh_Hau
+*/
+
+:root {
+    --title-hover-color: #007bff;
+    --original-price-color: #999;
+    --discounted-price-color: #ff0000;
+}
+
+.product-wrapper {
+    position: relative;
+}
+
+.product-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 0;
+}
+
+.product-card {
+    flex: 0 0 auto;
+    width: 200px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 10px;
+}
+
+.product-img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+}
+
+.card-body {
+    flex-grow: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-title {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.2em;
+    height: 3.6em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+.discount-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--discounted-price-color);
+}
+
+.original-price {
+    font-size: 14px;
+    text-decoration: line-through;
+    color: var(--original-price-color);
+}
+
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: var(--discounted-price-color);
+    color: white;
+    padding: 3px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.scroll-left {
+    left: -40px;
+}
+
+.scroll-right {
+    right: -40px;
+}
+
+@media (max-width: 768px) {
+    .scroll-btn {
+        display: none;
+    }
+}
+
+.product-card a:hover {
+    color: var(--title-hover-color) !important;
+}
