@@ -148,10 +148,10 @@
                 <ul class="dropdown-menu">
                     <!-- Không đăng nhập -->
                     <li id="loginItem">
-                        <a class="dropdown-item" href="#">Login</a>
+                        <a class="dropdown-item" href="jsp/guest/login.jsp">Login</a>
                     </li>
                     <li id="signupItem">
-                        <a class="dropdown-item" href="#">Sign up</a>
+                        <a class="dropdown-item" href="jsp/guest/signup.jsp">Sign up</a>
                     </li>
 
                     <!-- Khi đã đăng nhập -->
