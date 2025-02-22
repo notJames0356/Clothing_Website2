@@ -8,6 +8,10 @@ public class DBcontext {
     private final String jdbcUsername = "sa";
     private final String jdbcPassword = "123456";
 
+    protected Connection connection;
+    protected PreparedStatement statement;
+    protected ResultSet resultSet;
+
     public Connection getConnection() {
         Connection connection = null;
         try {
