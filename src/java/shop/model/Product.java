@@ -156,6 +156,7 @@ public class Product {
         this.discountedPrice = discountedPrice;
     }
 
+    
        public String getFormattedPrice() {
         return formatter.format(price);
     }
