@@ -68,6 +68,7 @@ public class SignupDAO extends DBcontext {
         connection = getConnection();
         PreparedStatement statementAccount = null;
         PreparedStatement statementCustomer = null;
+        HashPassword hash = new HashPassword();
         boolean isSuccess = false;
 
         try {
@@ -83,10 +84,11 @@ public class SignupDAO extends DBcontext {
                                             ,?
                                             ,?
                                             ,?)""";
-         
+            String passHashed = hash.hashPassword(account.getPassword());
+
             statementAccount = connection.prepareStatement(sqlAccount);
             statementAccount.setString(1, account.getUsername().trim());
-            statementAccount.setString(2, account.getPassword().trim());
+            statementAccount.setString(2, passHashed.trim());
             statementAccount.setString(3, account.getRole().trim());
             statementAccount.setString(4, account.getAcc_status().trim());
             statementAccount.executeUpdate();

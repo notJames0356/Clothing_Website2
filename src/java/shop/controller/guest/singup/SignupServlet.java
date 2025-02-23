@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.regex.Pattern;
 import shop.DAO.guest.singup.SignupDAO;
 import shop.model.Account;
 import shop.model.Customer;
@@ -74,6 +75,8 @@ public class SignupServlet extends HttpServlet {
             message = "Email already exists!";
         }else if(!passWord.equals(passwordSecond)){
             message = "Passwords do not match! Please re-enter!";
+        }else if (!isValidPassword(passWord)) { // Check strong passwords
+            message = "Password must be at least 8 characters, including uppercase and special characters!";
         }
         
         if (message != null) {
@@ -92,4 +95,9 @@ public class SignupServlet extends HttpServlet {
         }
     }
 
+      private boolean isValidPassword(String password) {
+        String regex = "^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,}$";
+        return Pattern.matches(regex, password);
+    }
+     
 }
