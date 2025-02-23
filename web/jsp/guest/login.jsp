@@ -18,19 +18,28 @@
             <form action="Login" method="POST" id="login-form">
                 <p>
                     <label for="txtUserName">Username or Email</label><br>
-                    <input type="text" id="txtUserName" name="txtUserName" placeholder="Enter Username or Email">
+                    <input type="text" id="txtUserName" name="txtUserName" 
+                           placeholder="Enter Username or Email" 
+                           value="${cookie.cUserName.value}">
                 </p>
                 <h7 style="color: red">${requestScope.msg}</h7>
                 <p>
                     <label for="txtPassword">Password</label><br>
                 <div class="password-container">
-                    <input type="password" id="txtPassword" name="txtPassword" placeholder="Enter Your Password">
+                    <input type="password" id="txtPassword" name="txtPassword" 
+                           placeholder="Enter Your Password" value="${cookie.cPassword.value}" >
                     <span class="toggle-password" onclick="togglePassword('txtPassword', this)">👁️</span>
                 </div>
                 </p>
                 <button type="submit" name="btnAction" value="Login">Login</button>
+                <p>
+                    <label for="remember">
+                        <input ${cookie.reMem.value==null?"":"checked"} id="remember" name="remember" type="checkbox">
+                        Remember me
+                    </label>
+                </p>
             </form>
         </div>
-       <script src="${pageContext.request.contextPath}/JS/guest/login.js"></script>
+        <script src="${pageContext.request.contextPath}/JS/guest/login.js"></script>
     </body>
 </html>
