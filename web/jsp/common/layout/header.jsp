@@ -5,7 +5,7 @@
 <header class="p-3 mb-3 border-bottom">
     <div class="container">
         <h4 class="text-center">
-            <a class="text-decoration-none text-white" href="home"
+            <a class="text-decoration-none text-white" href="${pageContext.request.contextPath}/home"
                >ONLINE SHOP</a
             >
         </h4>
@@ -114,7 +114,7 @@
             </ul>
 
             <div class="cart me-3">
-                <a href="cart.html" class="d-block link-dark text-decoration-none">
+                <a href="${pageContext.request.contextPath}/jsp/customer/cart.jsp" class="d-block link-dark text-decoration-none" style="color: white">
                     <img
                         class="border"
 
@@ -124,6 +124,7 @@
 
                         alt="cart-icon"
                         />
+                    ${size}
                 </a>
             </div>
 

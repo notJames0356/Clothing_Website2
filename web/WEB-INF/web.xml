@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+<<<<<<< HEAD
+=======
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>shop.controller.guest.login.LogoutServlet</servlet-class>
@@ -8,4 +10,5 @@
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
+>>>>>>> 51f0b7ca97c7fa46ee54905ffeb2e96913eac7cc
 </web-app>
