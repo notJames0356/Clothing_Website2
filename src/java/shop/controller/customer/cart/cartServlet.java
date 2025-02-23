@@ -36,6 +36,7 @@ public class cartServlet extends HttpServlet {
         CartUtil cart = (CartUtil) session.getAttribute("cart");
 
         
+        
         if (cart == null) {
             cart = new CartUtil();
         }
