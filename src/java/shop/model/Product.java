@@ -25,11 +25,24 @@ public class Product {
     private int cat_id;
     private String status;
     private int discount;
-    private BigDecimal discountedPrice;
+    private BigDecimal discountedPrice, salePrice;
 
     private static final NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
 
     public Product() {
+    }
+
+    public Product(int pro_id, String pro_name, BigDecimal price, int stock, String image, String size, String gender, String brand, String status, int discount) {
+        this.pro_id = pro_id;
+        this.pro_name = pro_name;
+        this.price = price;
+        this.stock = stock;
+        this.image = image;
+        this.size = size;
+        this.gender = gender;
+        this.brand = brand;
+        this.status = status;
+        this.discount = discount;
     }
 
     public Product(int pro_id, String pro_name, BigDecimal price, int stock, String image, String size, String gender, String brand, int cat_id, String status, int discount, BigDecimal discountedPrice) {
@@ -143,12 +156,22 @@ public class Product {
         this.discountedPrice = discountedPrice;
     }
 
-    public String getFormattedPrice() {
+       public String getFormattedPrice() {
         return formatter.format(price);
     }
 
     public String getFormattedDiscountedPrice() {
         return formatter.format(discountedPrice);
+    }
+
+    public BigDecimal getSalePrice() {
+        if (price != null && discount > 0) {
+            BigDecimal discountAmount = price.multiply(BigDecimal.valueOf(discount)).divide(BigDecimal.valueOf(100));
+            salePrice = price.subtract(discountAmount);
+        } else {
+            salePrice = price;
+        }
+        return salePrice;
     }
 
     @Override
