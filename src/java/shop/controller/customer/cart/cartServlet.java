@@ -35,6 +35,7 @@ public class cartServlet extends HttpServlet {
         productDAO proDAO = new productDAO();
         CartUtil cart = (CartUtil) session.getAttribute("cart");
 
+        
         if (cart == null) {
             cart = new CartUtil();
         }
