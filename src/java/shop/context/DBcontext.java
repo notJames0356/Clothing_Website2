@@ -5,8 +5,12 @@ import java.sql.*;
 public class DBcontext {
 
     private final String jdbcURL = "jdbc:sqlserver://localhost\\SQLEXPRESS:1433;databaseName=clothingShopDB;encrypt=false";
-    private final String jdbcUsername = "SA";
-    private final String jdbcPassword = "1";
+    private final String jdbcUsername = "sa";
+    private final String jdbcPassword = "123456";
+
+    protected Connection connection;
+    protected PreparedStatement statement;
+    protected ResultSet resultSet;
 
     public Connection getConnection() {
         Connection connection = null;
