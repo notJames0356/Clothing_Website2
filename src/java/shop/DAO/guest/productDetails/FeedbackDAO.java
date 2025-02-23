@@ -70,6 +70,7 @@ public class FeedbackDAO {
         return 0;
     }
     
+    
 //        public static void main(String[] args) {
 //        FeedbackDAO dao = new FeedbackDAO();
 //        dao.getAverageRating(1);

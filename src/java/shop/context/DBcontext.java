@@ -24,6 +24,7 @@ public class DBcontext {
         return connection;
     }
 
+    
     public static void main(String[] args) {
         try {
             System.out.println(new DBcontext().getConnection());
