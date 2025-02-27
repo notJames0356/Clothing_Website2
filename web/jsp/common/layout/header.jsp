@@ -35,13 +35,13 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="top/shirt.html">T-Shirts</a>
+                            <a class="dropdown-item" href="#">Shirts</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="top/jackets.html">Jackets</a>
+                            <a class="dropdown-item" href="#">T-Shirt</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="top/hoodies.html">Hoodies</a>
+                            <a class="dropdown-item" href="#">Jacket</a>
                         </li>
                     </ul>
                 </li>
@@ -55,13 +55,10 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="bottom/jeans.html">Jeans</a>
+                            <a class="dropdown-item" href="#">Pants</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="bottom/shorts.html">Shorts</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="bottom/skirts.html">Skirts</a>
+                            <a class="dropdown-item" href="#">Shorts</a>
                         </li>
                     </ul>
                 </li>
@@ -75,15 +72,16 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="accessories/hats.html">Hats</a>
+                            <a class="dropdown-item" href="#">Sunglasses</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="accessories/bags.html">Bags</a>
+                            <a class="dropdown-item" href="#">Wallet</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="accessories/jewelry.html"
-                               >Jewelry</a
-                            >
+                            <a class="dropdown-item" href="#">Bag</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">Hat</a>
                         </li>
                     </ul>
                 </li>
@@ -97,15 +95,15 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="accessories/hats.html">Male</a>
+                            <a class="dropdown-item" href="#">Male</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="accessories/bags.html"
+                            <a class="dropdown-item" href="#"
                                >Female</a
                             >
                         </li>
                         <li>
-                            <a class="dropdown-item" href="accessories/jewelry.html"
+                            <a class="dropdown-item" href="#"
                                >Unisex</a
                             >
                         </li>
@@ -171,7 +169,7 @@
                         <c:otherwise>
                             <!-- Khi đã đăng nhập -->
                             <li id="profileItem" >
-                                <a class="dropdown-item" href="profile">Profile</a>
+                                <a class="dropdown-item" href="#">Profile</a>
                             </li>
                             <li id="logoutItem">
                                 <a class="dropdown-item" href="Logout">Logout</a>
