@@ -47,6 +47,9 @@ public class Feedback {
         this.comment = comment;
         this.feedback_date = feedback_date;
     }
+    
+    public Feedback() {
+    }
 
     public int getFeedback_id() {
         return feedback_id;

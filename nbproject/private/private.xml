@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Academic_Materials/SE/hk5/SWP391/Clothing_Website/src/java/shop/controller/guest/singup/SignupServlet.java</file>
-            <file>file:/D:/Academic_Materials/SE/hk5/SWP391/Clothing_Website/src/java/shop/DAO/guest/singup/SignupDAO.java</file>
+            <file>file:/D:/Study%20Files/Semester%205/SWP391/GIT/ClothingWebsite27-2_2/Clothing_Website/src/java/shop/controller/guest/productDetails/ProductDetailsController.java</file>
+            <file>file:/D:/Study%20Files/Semester%205/SWP391/GIT/ClothingWebsite27-2_2/Clothing_Website/src/java/shop/model/Product.java</file>
+            <file>file:/D:/Study%20Files/Semester%205/SWP391/GIT/ClothingWebsite27-2_2/Clothing_Website/src/java/shop/context/DBcontext.java</file>
+            <file>file:/D:/Study%20Files/Semester%205/SWP391/GIT/ClothingWebsite27-2_2/Clothing_Website/src/java/shop/DAO/guest/productDetails/ProductDetailsDAO.java</file>
+            <file>file:/D:/Study%20Files/Semester%205/SWP391/GIT/ClothingWebsite27-2_2/Clothing_Website/src/java/shop/model/Feedback.java</file>
+            <file>file:/D:/Study%20Files/Semester%205/SWP391/GIT/ClothingWebsite27-2_2/Clothing_Website/web/jsp/guest/productDetails.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -26,8 +26,11 @@ public class Product {
     private String status;
     private int discount;
     private BigDecimal discountedPrice, salePrice;
+    private Type type;
 
     private static final NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
+    private Double averageRating;
+    private int feedbackCount;
 
     public Product() {
     }
@@ -197,9 +200,34 @@ public class Product {
         return salePrice;
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    // Getter và Setter cho averageRating
+    public double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(double averageRating) {
+        this.averageRating = averageRating;
+    }
+
+// Getter và Setter cho feedbackCount
+    public int getFeedbackCount() {
+        return feedbackCount;
+    }
+
+    public void setFeedbackCount(int feedbackCount) {
+        this.feedbackCount = feedbackCount;
+    }
+
     @Override
     public String toString() {
         return "Product{" + "pro_id=" + pro_id + ", pro_name=" + pro_name + ", price=" + price + ", stock=" + stock + ", image=" + image + ", size=" + size + ", gender=" + gender + ", brand=" + brand + ", type_id=" + type_id + ", status=" + status + ", discount=" + discount + '}';
     }
-
 }
