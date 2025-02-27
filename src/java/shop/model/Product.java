@@ -22,7 +22,6 @@ public class Product {
     private String size;
     private String gender;
     private String brand;
-    private int cat_id;
     private int type_id;
     private String status;
     private int discount;
@@ -32,7 +31,6 @@ public class Product {
 
     public Product() {
     }
-
 
     public Product(int pro_id, String pro_name, BigDecimal price, int stock, String image, String size, String gender, String brand, String status, int discount) {
         this.pro_id = pro_id;
@@ -61,9 +59,9 @@ public class Product {
         this.discount = discount;
         this.discountedPrice = discountedPrice;
     }
-    
-    public Product(int pro_id, String pro_name, BigDecimal price, int stock, 
-            String image, String size, String gender, String brand, int type_id, 
+
+    public Product(int pro_id, String pro_name, BigDecimal price, int stock,
+            String image, String size, String gender, String brand, int type_id,
             String status, int discount) {
         this.pro_id = pro_id;
         this.pro_name = pro_name;
@@ -146,7 +144,7 @@ public class Product {
         return type_id;
     }
 
-    public void setType_id(int cat_id) {
+    public void setType_id(int type_id) {
         this.type_id = type_id;
     }
 
@@ -174,8 +172,7 @@ public class Product {
         this.discountedPrice = discountedPrice;
     }
 
-    
-       public String getFormattedPrice() {
+    public String getFormattedPrice() {
         return formatter.format(price);
     }
 

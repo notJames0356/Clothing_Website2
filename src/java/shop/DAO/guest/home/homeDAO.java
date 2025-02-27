@@ -40,7 +40,7 @@ public class homeDAO {
 
             while (rs.next()) {
                 Product p = new Product();
-                p.setPro_id(rs.getInt(1)); 
+                p.setPro_id(rs.getInt(1));
                 p.setPro_name(rs.getString(2));
                 p.setImage(rs.getString(3));
                 p.setDiscount(rs.getInt(4));
@@ -127,16 +127,38 @@ public class homeDAO {
         return list;
     }
 
-    public List<Product> getRecommendProducts(Integer cus_id) {
+    public String getCusIdByUsername(String username) {
+        String cusId = "";
+        String sql = "select cus_id \n"
+                + "from Customer\n"
+                + "where username = ?";
+
+        try {
+            conn = new DBcontext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                cusId = rs.getString(1);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cusId;
+    }
+
+    public List<Product> getRecommendProducts(String cus_id) {
         List<Product> list = new ArrayList<>();
         String sql;
 
-        if (cus_id != null) {
+        if (!"".equals(cus_id)) {
             sql = "SELECT TOP 1 o.order_id FROM [Order] o WHERE o.cus_id = ? ORDER BY o.order_date DESC";
             try {
                 conn = new DBcontext().getConnection();
                 ps = conn.prepareStatement(sql);
-                ps.setInt(1, cus_id);
+                ps.setString(1, cus_id);
                 rs = ps.executeQuery();
 
                 if (rs.next()) {
@@ -151,7 +173,7 @@ public class homeDAO {
                 } else {
                     sql = "SELECT TOP 1 c.cart_id FROM Cart c WHERE c.cus_id = ?";
                     ps = conn.prepareStatement(sql);
-                    ps.setInt(1, cus_id);
+                    ps.setString(1, cus_id);
                     rs = ps.executeQuery();
 
                     if (rs.next()) {
@@ -194,8 +216,8 @@ public class homeDAO {
         try {
             conn = new DBcontext().getConnection();
             ps = conn.prepareStatement(sql);
-            if (cus_id != null) {
-                ps.setInt(1, cus_id);
+            if (!"".equals(cus_id)) {
+                ps.setString(1, cus_id);
             }
             rs = ps.executeQuery();
 
@@ -214,4 +236,5 @@ public class homeDAO {
         }
         return list;
     }
+
 }
