@@ -1,9 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="shop.model.Feedback"%>
-<%@page import="shop.model.Product"%>
-<%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
+<%-- 
+    Document   : productDetails
+    Created on : Feb 17, 2025, 10:06:23 AM
+    Author     : Vu_Hoang
+--%>
 
 <!DOCTYPE html>
 <html>
@@ -23,197 +25,139 @@
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"
-        ></script>        
-        <style>
-            .product-container {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 30px;
-            }
-            .give-feedback {
-                background-color: #007bff;
-                color: white;
-                font-weight: bold;
-                border: none;
-                padding: 5px 10px;
-                cursor: pointer;
-                border-radius: 5px;
-                margin-top: 5px;
-                width: 200px;
-                height: 38px;
-            }
-            .add-to-cart {
-                background-color: #28a745;
-                color: white;
-                border: none;
-                padding: 5px 10px;
-                cursor: pointer;
-                border-radius: 5px;
-                margin-top: 5px;
-                width: 200px;
-                height: 38px;
-            }
-
-            .feedback-container {
-                width: 50%;
-                margin: 20px auto;
-                border: 1px solid #ccc;
-                padding: 10px;
-                border-radius: 10px;
-                background-color: #f9f9f9;
-                max-height: 200px;
-                overflow-y: auto;
-            }
-            .feedback-item {
-                padding: 10px;
-                border-bottom: 1px solid #ddd;
-                text-align: center;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                background: white;
-                border-radius: 5px;
-                margin-bottom: 5px;
-            }
-            .feedback-item:last-child {
-                border-bottom: none;
-            }
-            .feedback-details {
-                flex: 1;
-                text-align: left;
-                padding: 5px;
-            }
-            .feedback-rating {
-                font-size: 16px;
-                color: gold;
-                flex: 0 0 auto;
-                padding-right: 10px;
-            }
-            .feedback-date {
-                font-size: 12px;
-                color: gray;
-                flex: 0 0 auto;
-                padding-right: 10px;
-            }
-
-            .suggestion-container {
-                display: flex;
-                justify-content: space-around;
-                gap: 15px;
-                padding: 10px;
-            }
-            .suggestion-item {
-                flex: 1;
-                border: 1px solid #ddd;
-                border-radius: 10px;
-                padding: 10px;
-                text-align: center;
-                background-color: #f9f9f9;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-            .suggestion-item img {
-                width: 256px;
-                height: auto;
-                margin-bottom: 10px;
-            }
-            .suggestion-item .product-name strong {
-                font-weight: bold;
-            }
-            .suggestion-item .product-name {
-                flex-grow: 1;
-            }
-            .suggestion-item .product-price strong {
-                font-weight: bold;
-            }
-            .suggestion-item .product-price {
-                margin-top: auto;
-                font-size: 16px;
-            }
-
-        </style>
+        ></script>
     </head>
     <body>
-        <!-- header -->
-        <jsp:include page="../common/layout/header.jsp"></jsp:include>
 
-            <h1>Product Details</h1>
+        <!-- Header -->
+        <jsp:include page="../common/layout/header.jsp" />
 
-        <% Product product = (Product) request.getAttribute("product"); %>
+        <div class="container mt-5">
+            <h1 class="text-center">Product Details</h1>
 
-        <% if (product != null) { %>
-        <div class="product-container">
-            <div class="product-image">
-                <img src="<%= product.getImage() %>" alt="Product Image" style="width:300px;
-                     height:auto;">
-            </div>
-            <div class="product-info">
-                <p><strong>Product ID:</strong> <%= product.getPro_id() %></p>
-                <p><strong>Name:</strong> <%= product.getPro_name() %></p>
-                <p><strong>Size:</strong> <%= product.getSize() %></p>
-                <p><strong>Type:</strong> <%= product.getType_id() %></p>
-                <p><strong>Stocks:</strong> <%= product.getStock() %></p>
-                <p><strong>Price:</strong> <%= product.getPrice() %> VND</p>
-                <p><strong>Feedback:</strong> <%= request.getAttribute("averageRating") %> ⭐ (<%= request.getAttribute("feedbackCount") %>)</p>
-                <button class="add-to-cart">Add to Cart</button>
-                <button class="give-feedback">Give Feedback</button>
-            </div>
-        </div>
+            <!-- PHẦN 1: Chi tiết sản phẩm -->
+            <div class="row justify-content-center">
+                <div class="col-md-10 border p-4 mb-5">
+                    <c:choose>
+                        <c:when test="${not empty productDetails}">
+                <c:set var="pd" value="${productDetails}" />
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <img src="${pd.image}" class="img-fluid" alt="${pd.pro_name}" />
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Product ID:</strong> ${pd.pro_id}</p>
+                        <p><strong>Name:</strong> ${pd.pro_name}</p>
+                        <p><strong>Size:</strong> ${pd.size}</p>
+                        <p><strong>Type:</strong> ${pd.type.type_name}</p>
+                        <p><strong>Stock:</strong> ${pd.stock}</p>
+                        <p><strong>Price:</strong> 
+                            <c:if test="${pd.discount > 0}">
+                                <span class="original-price text-decoration-line-through">${pd.formattedPrice} VND</span>
+                                <span class="discount-price text-danger">${pd.formattedDiscountedPrice} VND</span>
+                                <!-- Nút hiển thị % giảm giá -->
+                                <span class="badge bg-danger ms-2">-${pd.discount}%</span>
+                            </c:if>
+                            <c:if test="${pd.discount == 0}">
+                                <span class="discount-price">${pd.formattedPrice} VND</span>
+                            </c:if>
+                        </p>
+                        <p><strong>Rating:</strong> ${pd.averageRating} <span class="text-warning fs-5">★</span> (${pd.feedbackCount})</p>
 
-        <h2>Feedbacks:</h2>
-        <div class="feedback-container">
-            <%
-                List<Feedback> feedbacks = (List<Feedback>) request.getAttribute("feedbacks");
-                if (feedbacks != null && !feedbacks.isEmpty()) {
-                    for (Feedback f : feedbacks) {
-            %>
-            <div class="feedback-item">
-                <div class="feedback-details">
-                    <p><strong><%= f.getCus_name() %></strong></p>
-                    <p><%= f.getComment() %></p>
+                        <button class="btn btn-success">Add to Cart</button>
+                        <button class="btn btn-primary">Give Feedback</button>
+                    </div>
                 </div>
-                <p class="feedback-rating"><%= f.getRating() %> ⭐</p>
-                <p class="feedback-date"><%= f.getFeedback_date() %></p>
+            </c:when>
+            <c:otherwise>
+                <p class="text-danger text-center">${productDetailsMessage}</p>
+            </c:otherwise>
+        </c:choose>
+    </div>
+</div>
+
+        <!-- PHẦN 2: Feedback của khách hàng -->
+        <div class="container rounded p3 mt-5 product-wrapper">
+            <h3 class="mt-5">Feedbacks:</h3>
+        </div>
+        <div>
+            <div class="container d-flex justify-content-center">
+                <div class="col-md-5 border rounded p-4" style="max-height: 200px; overflow-y: auto;">
+                    <c:choose>
+                        <c:when test="${not empty feedbackOfProduct}">
+                            <c:forEach var="f" items="${feedbackOfProduct}">
+                                <div class="border-bottom pb-2 mb-2">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <!-- Tên khách hàng (góc trái) -->
+                                        <span class="fw-bold">${f.cus_name}</span>
+
+                                        <!-- Số sao đánh giá (ở giữa) -->
+                                        <span class="text-warning">
+                                            <c:forEach begin="1" end="${f.rating}">★</c:forEach>
+                                            <c:forEach begin="${f.rating + 1}" end="5">☆</c:forEach>
+                                            </span>
+
+                                            <!-- Ngày feedback (góc phải) -->
+                                            <span class="text-muted small">${f.feedback_date}</span>
+                                    </div>
+
+                                    <!-- Nội dung feedback (nửa dưới) -->
+                                    <p class="mt-1 text-dark">${f.comment}</p>
+                                </div>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <p class="text-muted text-center">${feedbackOfProductMessage}</p>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
             </div>
-            <%
-                    }
-                } else {
-            %>
-            <p style="text-align: center;">No feedback available.</p>
-            <%
-                }
-            %>
         </div>
 
-        <h2>Suggestion:</h2>
-        <div class="suggestion-container">
-            <%
-                List<Product> suggestions = (List<Product>) request.getAttribute("suggestions");
-                if (suggestions != null && !suggestions.isEmpty()) {
-                    for (Product p : suggestions) {
-            %>
-            <div class="suggestion-item">
-                <img src="<%= p.getImage() %>" alt="Product Image">
-                <p class="product-name"><strong>Product Name:</strong> <%= p.getPro_name() %></p>
-                <p class="product-price"><strong>Price:</strong> <%= p.getPrice() %> VND</p>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-            <%
-                    }
-                } else {
-            %>
-            <p>No suggestion available.</p>
-            <%
-                }
-            %>
-        </div>
-        <% } else { %>
-        <p>Product not found.</p>
-        <% } %>
+        <!-- PHẦN 3: Sản phẩm gợi ý -->
+        <div class="container rounded p3 mt-5 product-wrapper">
+            <h3 class="mt-5">Suggestions:</h3>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3">
+                <c:choose>
+                    <c:when test="${not empty suggestProducts}">
+                        <c:forEach items="${suggestProducts}" var="s">
 
-        <!-- footer -->
-        <jsp:include page="../common/layout/footer.jsp"></jsp:include>
+                            <div class="col">
+                                <div class="border rounded p-3 text-center h-100 d-flex flex-column justify-content-between position-relative">
+                                    <!-- Hiển thị phần trăm giảm giá -->
+                                    <c:if test="${s.discount > 0}">
+                                        <div class="position-absolute top-0 start-0 bg-danger text-white px-2 py-1 rounded">
+                                            -${s.discount}%
+                                        </div>
+                                    </c:if>
+                                    <a class="text-decoration-none text-dark" href="detail?id=${s.pro_id}">
+                                        <img src="${s.image}" class="img-fluid" alt="${s.pro_name}" />
+                                    </a>
+                                    <a class="text-decoration-none text-dark" href="detail?id=${s.pro_id}">
+                                        <h5 class="card-title">${s.pro_name}</h5>
+                                    </a>
+                                    <div>
+                                        <c:if test="${s.discount > 0}">
+                                            <span class="original-price text-decoration-line-through">${s.formattedPrice} VND</span>
+                                            <span class="discount-price text-danger">${s.formattedDiscountedPrice} VND</span>
+                                        </c:if>
+                                        <c:if test="${s.discount == 0}">
+                                            <div class="discount-price">${s.formattedPrice} VND</div>
+                                        </c:if>
+                                    </div>
+                                    <button class="btn btn-success mt-auto">Add to Cart</button>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <p class="text-muted text-center">${suggestProductsMessage}</p>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <jsp:include page="../common/layout/footer.jsp" />
     </body>
 </html>
