@@ -28,7 +28,7 @@
             </ul>
 
             <div class="cart me-3">
-                <a href="${pageContext.request.contextPath}/jsp/customer/cart.jsp" class="d-block link-dark text-decoration-none" style="color: white">
+                <a href="Cart" class="d-block link-dark text-decoration-none" style="color: white">
                     <img
                         class="border"
 
@@ -38,7 +38,9 @@
 
                         alt="cart-icon"
                         />
-                    ${size}
+                    <c:if test="${not empty sessionScope.customer}">
+                        <span>${size}</span>
+                    </c:if>
                 </a>
             </div>
 
