@@ -15,8 +15,9 @@ import shop.model.Product;
  *
  * @author Admin
  */
-public class ProductDAO extends DBcontext{
-      public Product getProductById(int proId) {
+public class ProductDAO extends DBcontext {
+
+    public Product getProductById(int proId) {
         String sql = "SELECT * FROM Product WHERE pro_id = ?";
         try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
@@ -41,6 +42,16 @@ public class ProductDAO extends DBcontext{
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void updateStock(int productId, int quantitySold) throws SQLException {
+        String sql = "UPDATE product SET stock = stock - ? WHERE pro_id = ?";
+
+        try (Connection connection = new DBcontext().getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, quantitySold);
+            statement.setInt(2, productId);
+            statement.executeUpdate();
+        }
     }
 
     public static void main(String[] args) {

@@ -52,7 +52,7 @@
                             <form action="Cart" method="POST">
                                 <input type="hidden" name="pro_id" value="${i.product.pro_id}" />
                                 <input type="hidden" name="action" value="updateQuantity"/>
-                                <input type="number" name="quantity" value="${i.quantity}" min="0" max="${i.product.stock}" onchange="this.form.submit()" />
+                                <input type="number" name="quantity" value="${i.quantity}" min="1" max="${i.product.stock}" onchange="this.form.submit()" />
                             </form>                         
                         </td>
                         <td class="total_product"><fmt:formatNumber value="${i.product.salePrice * i.quantity}" /> VND</td>
@@ -71,10 +71,14 @@
                 <c:set var="total" value="${total + (i.quantity * i.product.salePrice)}"/>
             </c:forEach>
             <h3 style="font-family: inherit">TOTAL: <fmt:formatNumber value="${total}" /> VND</h3>
-            <form action="checkoutServlet" method="post">
                 <div class="checkout_btn">
-                    <button style="border-radius: 20px" class="btn btn-success" type="submit"><h3>Check Out</h3></button>
+                    <form action="Checkout">
+                        <button style="border-radius: 20px" class="btn btn-success" type="submit">
+                            <h3>Check Out</h3>
+                        </button>
+                    </form>
                 </div>
+
             </form>
         </c:if>
 

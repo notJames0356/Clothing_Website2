@@ -19,6 +19,8 @@ public class CartUtil {
     private int customerId;
 
     public CartUtil() {
+        items = new ArrayList<>();
+
     }
 
     public CartUtil(int customerId) {
