@@ -31,6 +31,21 @@
 
         <!-- Header -->
         <jsp:include page="../common/layout/header.jsp" />
+        <c:if test="${not empty sessionScope.successMessage}">
+            <div class="alert alert-success" style="
+                 padding: 10px;
+                 background-color: #4caf50;
+                 color: white;
+                 text-align: center;
+                 border-radius: 5px;
+                 margin: 15px auto;
+                 width: 300px;
+                 display: block;
+                 font-weight: bold;">
+                ${sessionScope.successMessage}
+            </div>
+            <c:remove var="successMessage" scope="session"/>
+        </c:if>
 
         <div class="container mt-5">
             <h1 class="text-center">Product Details</h1>
@@ -173,3 +188,4 @@
             <jsp:include page="../common/layout/footer.jsp" />
     </body>
 </html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -122,9 +122,15 @@ public class CartServlet extends HttpServlet {
                         CartItem newItem = new CartItem(product, 1);
                         cart.addItemToCart(newItem);
                         CartDAO.saveCartToDatabase(customer.getCus_id(), cart);
-
                     }
 
+                    session.setAttribute("cart", cart);
+
+                    session.setAttribute("size", cart.getItems().size());
+
+                    session.setAttribute("successMessage", "Product has been added to cart!");
+
+                    response.sendRedirect("detail?id=" + id);
                 } catch (NumberFormatException e) {
                     request.setAttribute("error", "Invalid product ID");
                     request.getRequestDispatcher("jsp/customer/cart.jsp").forward(request, response);
@@ -139,6 +145,10 @@ public class CartServlet extends HttpServlet {
 
                     CartDAO.removeCartItem(customer.getCus_id(), id);
 
+                    session.setAttribute("cart", cart);
+                    session.setAttribute("size", cart.getItems().size());
+                    response.sendRedirect("Cart");
+
                 } catch (NumberFormatException e) {
                     request.getRequestDispatcher("jsp/customer/cart.jsp").forward(request, response);
                 }
@@ -152,17 +162,14 @@ public class CartServlet extends HttpServlet {
                     int productId = Integer.parseInt(idUpdate);
                     int quantity = Integer.parseInt(quantityUpdate);
 
-                    if (quantity <= 0) {
-                        cart.removeItemToCart(productId);
-                    } else {
-                        cart.updateItemToCart(productId, quantity);
-                        CartDAO.updateCartItem(customer.getCus_id(), productId, quantity);
-                    }
-
-                   
+                    cart.updateItemToCart(productId, quantity);
+                    CartDAO.updateCartItem(customer.getCus_id(), productId, quantity);
+                    session.setAttribute("cart", cart);
+                    session.setAttribute("size", cart.getItems().size());
+                    response.sendRedirect("Cart");
 
                 } catch (NumberFormatException e) {
-                    request.setAttribute("error", "Lỗi cập nhật số lượng");
+                    request.setAttribute("error", "error");
                 }
 
                 break;
@@ -172,10 +179,10 @@ public class CartServlet extends HttpServlet {
                 break;
         }
 
-        session.setAttribute("cart", cart);
-        session.setAttribute("size", cart.getItems().size());
-        response.sendRedirect("Cart");
-
+//        session.setAttribute("cart", cart);
+//        
+//        session.setAttribute("size", cart.getItems().size());
+        //   request.getRequestDispatcher("jsp/guest/productDetail.jsp").forward(request, response);
     }
 
     /**

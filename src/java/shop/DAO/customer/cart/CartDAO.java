@@ -111,6 +111,18 @@ public class CartDAO {
         }
     }
 
+    public static void removeAllCartItems(int customerId) {
+        DBcontext db = new DBcontext();
+        String sql = "DELETE FROM cart WHERE cus_id = ?";
+
+        try (Connection connection = db.getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, customerId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void updateCartItem(int customerId, int productId, int quantity) {
         DBcontext db = new DBcontext();
 
