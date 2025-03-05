@@ -33,12 +33,13 @@ function changeType(button) {
         });
     }
 }
-function loadOrders() {
-    fetch('Order')  // Gửi request GET đến OrderServlet
-            .then(response => response.text())
-            .then(data => {
-                document.querySelector('#orders').innerHTML = data;
-            })
-            .catch(error => console.error('Error:', error));
+function togglePassword(inputId, icon) {
+    var input = document.getElementById(inputId);
+    if (input.type === "password") {
+        input.type = "text";
+        icon.textContent = "🙈"; // Icon mắt đóng
+    } else {
+        input.type = "password";
+        icon.textContent = "👁️"; // Icon mắt mở
+    }
 }
-

@@ -37,8 +37,9 @@
                                         <img style="border: 5px solid #2d336b; height: 255px" src="img/icon/header/user.png" width="100%">
                                     </li>
                                     <li><a href="#account-details" data-toggle="tab" class="nav-link active">Account Details</a></li>
-                                    <li><a href="#orders" data-toggle="tab" class="nav-link" onclick="loadOrders()">Orders</a></li>
-
+                                    <li><a href="Order" class="nav-link">Orders</a></li>
+                                    <li><a href="ChangePassword" class="nav-link">Change Password</a></li>
+<!--                                    <li><a href="ChangePassword" data-toggle="tab" class="nav-link">Change Password</a></li>-->
                                 </ul>
                             </div>    
                         </div>
@@ -63,49 +64,21 @@
                                                 <input class="input_type " type="text"  id="txtAddress" name="txtAddress" value="${sessionScope.customer.address}" readonly>
                                                 <label for="txtPhone">Phone</label>
                                                 <input class="input_type input_read" type="text"  id="txtPhone" name="txtPhone" value="${sessionScope.customer.phone}" readonly>
+
+                                                <div class="save_button primary_btn default_button">
+                                                    <button onclick="changeType(this)" id="edit" type="button"
+                                                            style="background-color: #2c3e50; color: white; border: none; padding: 12px;
+                                                            font-size: 16px; font-weight: bold; border-radius: 5px; width: 100%;
+                                                            margin-top: 15px; cursor: pointer;">Edit</button>
+                                                </div>
                                                 <c:if test="${not empty requestScope.message}">
-                                                    <span class="message ${requestScope.message == 'Update Successful!' ? 'success' : 'error'}">
+                                                    <span class="message ${requestScope.message == 'Update Successful!' || requestScope.message == 'Password Change Successful' ? 'success' : 'error'}">
                                                         ${requestScope.message}
                                                     </span>
                                                 </c:if>
-
-                                                <div class="save_button primary_btn default_button">
-                                                    <button onclick="changeType(this)" id="edit" type="button" style="background:#2d336b">Edit</button>
-                                                </div>
                                             </form>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-
-                            <!-- Orders -->
-                            <div class="tab-pane fade" id="orders">
-                                <h3>Orders</h3>
-                                <div class="coron_table table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Full Name</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
-                                                <th>Payment</th>
-                                                <th>Total</th>
-                                                <th>Actions</th>	 	 	 	
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach items="${requestScope.listOrder}" var="o">
-                                                <tr>
-                                                    <td>${sessionScope.customer.cus_name}</td>
-                                                    <td>${o.order_date}</td>
-                                                    <td>${o.tracking}</td>
-                                                    <td>${o.payment_method}</td>
-                                                    <td>${o.total_price}</td>
-                                                    <td><a href="OrderDetail?id=${o.order_id != null ? o.order_id : ''}" class="view">View</a></td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </div> <!-- End Tab Content -->
