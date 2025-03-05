@@ -66,12 +66,13 @@ public class LoginServlet extends HttpServlet {
 
             //Set customer to session
             HttpSession session = request.getSession();
+            session.setAttribute("admin", account);
             session.setAttribute("customer", customer);
 
             //lay gio hang tu db
             CartUtil cart = CartDAO.getCartByCustomerId(customer.getCus_id());
             session.setAttribute("cart", cart);
-            session.setAttribute("size", cart.getItems().size()); 
+            session.setAttribute("size", cart.getItems().size());
             Cookie userNameCookie = new Cookie("cUserName", username);
             userNameCookie.setMaxAge(60 * 60 * 24 * 30 * 2); //3 months
 

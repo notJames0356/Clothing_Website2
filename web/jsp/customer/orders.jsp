@@ -23,6 +23,31 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/css/bootstrap.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+
+        <style>
+            /* Định dạng chung cho nút */
+            .shopping {
+                display: inline-block;
+                background-color: #ff6600;
+                color: #fff;
+                padding: 12px 25px;
+                font-size: 18px;
+                font-weight: bold;
+                text-align: center;
+                border-radius: 8px;
+                text-decoration: none;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                transition: all 0.3s ease-in-out;    
+            }
+
+            /* Hiệu ứng khi hover vào nút */
+            .shopping:hover {
+                background-color: #ff4500;
+                color: white;
+                transform: scale(1.05);
+                text-decoration: none;
+            }
+        </style>
     </head>
     <body>
 
@@ -50,6 +75,15 @@
                                 <!-- Account Details -->
                                 <div class="tab-pane fade show active" id="account-details">
                                     <h3>List Order</h3>
+                                <c:if test="${empty requestScope.listOrder}">
+                                    <span class="message warn center-screen">
+                                        You currently have no orders.
+                                    </span>
+                                    <a href="products" class="shopping">
+                                        Shopping Now
+                                    </a>
+                                </c:if>
+                                <c:if test="${not empty requestScope.listOrder}">
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -61,19 +95,20 @@
                                                 <th>Actions</th>	 	 	 	
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                        <c:forEach items="${requestScope.listOrder}" var="o">
-                                            <tr>
-                                                <td>${sessionScope.customer.cus_name}</td>
-                                                <td>${o.order_date}</td>
-                                                <td>${o.tracking}</td>
-                                                <td>${o.payment_method}</td>
-                                                <td>${o.total_price}</td>
-                                                <td><a href="OrderDetail?id=${o.order_id != null ? o.order_id : ''}" class="view">View</a></td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
+                                        <tbody>   
+                                            <c:forEach items="${requestScope.listOrder}" var="o">
+                                                <tr>
+                                                    <td>${sessionScope.customer.cus_name}</td>
+                                                    <td>${o.order_date}</td>
+                                                    <td>${o.tracking}</td>
+                                                    <td>${o.payment_method}</td>
+                                                    <td>${o.total_price}</td>
+                                                    <td><a href="OrderDetail?id=${o.order_id != null ? o.order_id : ''}" class="view">View</a></td>
+                                                </tr>
+                                            </c:forEach>  
+                                        </tbody>
+                                    </table>
+                                </c:if>
                             </div>
                         </div>
                     </div>

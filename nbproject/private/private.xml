@@ -3,14 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Academic_Materials/SE/hk5/SWP391/swp/new/Clothing_Website/web/jsp/customer/changePassword.jsp</file>
-            <file>file:/D:/Academic_Materials/SE/hk5/SWP391/swp/new/Clothing_Website/src/java/shop/DAO/customer/changePassword/ChangePasswordDAO.java</file>
-            <file>file:/D:/Academic_Materials/SE/hk5/SWP391/swp/new/Clothing_Website/src/java/shop/controller/customer/userProfile/userProfile.java</file>
-            <file>file:/D:/Academic_Materials/SE/hk5/SWP391/swp/new/Clothing_Website/web/jsp/customer/userProfile.jsp</file>
-            <file>file:/D:/Academic_Materials/SE/hk5/SWP391/swp/new/Clothing_Website/web/CSS/customer/profile.css</file>
-            <file>file:/D:/Academic_Materials/SE/hk5/SWP391/swp/new/Clothing_Website/src/java/shop/controller/guest/singup/SignupServlet.java</file>
-            <file>file:/D:/Academic_Materials/SE/hk5/SWP391/swp/new/Clothing_Website/src/java/shop/controller/customer/changePassword/ChangePasswordServlet.java</file>
-            <file>file:/D:/Academic_Materials/SE/hk5/SWP391/swp/new/Clothing_Website/web/JS/customer/ProfileAndOrder.js</file>
+            <file>file:/D:/Academic_Materials/SE/hk5/SWP391/swp/new/Clothing_Website/src/java/shop/DAO/guest/login/LoginDAO.java</file>
+            <file>file:/D:/Academic_Materials/SE/hk5/SWP391/swp/new/Clothing_Website/web/jsp/common/error.jsp</file>
+            <file>file:/D:/Academic_Materials/SE/hk5/SWP391/swp/new/Clothing_Website/src/java/shop/controller/guest/login/LoginServlet.java</file>
         </group>
     </open-files>
 </project-private>
