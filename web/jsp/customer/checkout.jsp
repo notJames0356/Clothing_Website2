@@ -45,8 +45,9 @@
                         </tbody>
                     </table>
                     <form action="profile">
-                        <button type="submit">Update Information</button>
+                        <button class="update" type="submit">Update Information</button>
                     </form>
+
 
 
                 </c:if>
@@ -86,21 +87,29 @@
                         </c:forEach>
                         <h3 class="total_price">TOTAL: <fmt:formatNumber value="${total}" /> VND</h3>
                     </c:if>
-                    <div>
-                        <label>
-                            <input type="radio" name="payment_method" value="cash" checked>
-                            <span></span> Cash on Delivery
-                        </label>
-                        <br>
-                        <label>
-                            <input type="radio" name="payment_method" value="bank_transfer">
-                            <span></span> Banking
-                        </label>
+                    <form action="Checkout" method="post">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_method"  value="cash" checked>
+                            <label class="form-check-label" for="cash">
+                                Cash on Delivery
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_method" value="bank_transfer">
+                            <label class="form-check-label" for="bank_transfer">
+                                Banking
+                            </label>
+                        </div>
 
-                    </div>
-                    <c:if test="${sessionScope.admin.role.toLowerCase() != 'admin'}">
-                        <button type="submit">Order now</button>
-                    </c:if>
+                        <input type="hidden" name="amount" value="${total}">
+                        <input type="hidden" name="vnp_OrderInfo" value="1">
+                        <input type="hidden" name="language" value="vn">
+
+                        <c:if test="${sessionScope.admin.role.toLowerCase() != 'admin'}">
+                            <button type="submit" class="checkout">Proceed to Payment</button>
+                        </c:if>
+                    </form>
+
 
                 </form>
             </div>
