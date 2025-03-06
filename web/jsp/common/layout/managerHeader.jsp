@@ -2,9 +2,15 @@
 
 <nav class="navbar navbar-dark px-4 header">
     <div class="container-fluid">
-        <span class="navbar-brand"
-              ><i class="bi bi-grid-1x2"></i> Dashboard</span
-        >
+        <span class="navbar-brand">
+            <a
+                class="nav-link px-2 text-light main-link rounded-3"
+                href="${pageContext.request.contextPath}/home"
+                >
+                Back to Home
+            </a>
+        </span>
+
         <div class="dropdown">
             <button
                 class="btn dropdown-toggle"

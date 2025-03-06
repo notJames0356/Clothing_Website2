@@ -14,7 +14,7 @@
             class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
             >
             <ul
-                class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+                class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 gap-2"
                 >
                 <li class="nav-item">
                     <a
@@ -23,6 +23,16 @@
                         href="products"
                         >
                         All Products
+                    </a>
+                </li>
+
+                <!-- set điều kiện nếu là admin -->
+                <li class="nav-item">
+                    <a
+                        class="nav-link px-2 link-dark main-link border rounded-3"
+                        href="${pageContext.request.contextPath}/jsp/admin/dashboard.jsp"
+                        >
+                        Back to Dashboard
                     </a>
                 </li>
             </ul>
@@ -96,7 +106,6 @@
                     </c:choose>
                 </ul>
             </div>
-            <div>${sessionScope.customer.cus_name}</div>
         </div>
     </div>
 </header>
