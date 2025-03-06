@@ -52,8 +52,9 @@
                             <form action="Cart" method="POST">
                                 <input type="hidden" name="pro_id" value="${i.product.pro_id}" />
                                 <input type="hidden" name="action" value="updateQuantity"/>
-                                <input type="number" name="quantity" value="${i.quantity}" min="1" max="${i.product.stock}" onchange="this.form.submit()" />
-                            </form>                         
+                                <input type="number" name="quantity" value="${i.quantity}" min="1" max="${i.product.stock}" 
+                                       onchange="checkStock(this, ${i.product.stock}); this.form.submit();" />
+                            </form>                      
                         </td>
                         <td class="total_product"><fmt:formatNumber value="${i.product.salePrice * i.quantity}" /> VND</td>
                         <td class="remove_product"> 
@@ -71,22 +72,28 @@
                 <c:set var="total" value="${total + (i.quantity * i.product.salePrice)}"/>
             </c:forEach>
             <h3 style="font-family: inherit">TOTAL: <fmt:formatNumber value="${total}" /> VND</h3>
-                <div class="checkout_btn">
-                    <form action="Checkout">
-                        <button style="border-radius: 20px" class="btn btn-success" type="submit">
-                            <h3>Check Out</h3>
-                        </button>
-                    </form>
-                </div>
+            <div class="checkout_btn">
+                <form action="Checkout">
+                    <button style="border-radius: 20px" class="btn btn-success" type="submit">
+                        <h3>Check Out</h3>
+                    </button>
+                </form>
+            </div>
 
-            </form>
-        </c:if>
+        </form>
+    </c:if>
 
-        <jsp:include page="../common/layout/footer.jsp"></jsp:include>
-    </body>
+    <jsp:include page="../common/layout/footer.jsp"></jsp:include>
+</body>
 </html>
 <script>
     function confirmDelete() {
-        return confirm("Do you want to delete product");
+        return confirm("Do you want to remove the product from your shopping cart?");
+    }
+    function checkStock(input, stock) {
+        var quantity = parseInt(input.value);
+        if (quantity === stock) {
+            alert("You have selected the maximum quantity in stock!");
+        }
     }
 </script>

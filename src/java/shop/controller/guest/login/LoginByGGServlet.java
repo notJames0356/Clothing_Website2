@@ -14,9 +14,11 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import shop.DAO.customer.cart.CartDAO;
 import shop.DAO.guest.login.LoginDAO;
 import shop.DAO.guest.singup.SignupDAO;
 import shop.model.AccountGG;
+import shop.model.CartUtil;
 import shop.model.Customer;
 
 /**
@@ -41,7 +43,7 @@ public class LoginByGGServlet extends HttpServlet {
         try {
             response.setContentType("text/html;charset=UTF-8");
             String code = request.getParameter("code");
-            
+
             LoginDAO loginDao = new LoginDAO();
             LoginByGG gg = new LoginByGG();
             SignupDAO signupDAO = new SignupDAO();
@@ -69,6 +71,12 @@ public class LoginByGGServlet extends HttpServlet {
                 //Set customer to session
                 HttpSession session = request.getSession();
                 session.setAttribute("customer", customer);
+
+                //lay gio hang tu database khi dang nhap
+                CartUtil cart = CartDAO.getCartByCustomerId(customer.getCus_id());
+                session.setAttribute("cart", cart);
+                session.setAttribute("size", cart.getItems().size());
+
                 response.sendRedirect("home");
             } else {
                 // nếu email chưa tồn tại thì đăng kí
