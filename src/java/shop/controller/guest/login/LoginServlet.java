@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
         LoginDAO loginDao = new LoginDAO();
         Account account = loginDao.checkLoginAccount(username, password);
 
-        if (account != null) {
+        if (account != null && account.getAcc_status().equalsIgnoreCase("active")) {
             // Create Session
             Customer customer = loginDao.getCustomer(account.getUsername());
 
@@ -97,7 +97,12 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("home");
             }
         } else {
-            String message = "Invalid username or password!";
+            String message;
+               if (!account.getAcc_status().equalsIgnoreCase("active")) {
+                message = "Your account has been temporarily locked.";
+            } else {
+                message = "Invalid username or password!";
+            }
             request.setAttribute("msg", message);
             request.getRequestDispatcher(LOGIN).forward(request, response);
 

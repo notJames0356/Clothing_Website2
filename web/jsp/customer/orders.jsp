@@ -14,6 +14,8 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/customer/profile.css"/>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/common/layout/layout.css"/>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/guest/home.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/customer/orders.css"/>
+
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -23,31 +25,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/css/bootstrap.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/js/bootstrap.min.js"></script>
-
-        <style>
-            /* Định dạng chung cho nút */
-            .shopping {
-                display: inline-block;
-                background-color: #ff6600;
-                color: #fff;
-                padding: 12px 25px;
-                font-size: 18px;
-                font-weight: bold;
-                text-align: center;
-                border-radius: 8px;
-                text-decoration: none;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-                transition: all 0.3s ease-in-out;
-            }
-
-            /* Hiệu ứng khi hover vào nút */
-            .shopping:hover {
-                background-color: #ff4500;
-                color: white;
-                transform: scale(1.05);
-                text-decoration: none;
-            }
-        </style>
     </head>
     <body>
 
@@ -74,9 +51,10 @@
                     <div class="col-sm-12 col-md-9 col-lg-9">
                         <!-- Tab Content -->
                         <div class="tab-content dashboard_content">
-                            <!-- Account Details -->
                             <div class="tab-pane fade show active" id="account-details">
                                 <h3>List Order</h3>
+
+                                <!-- Xử lý các bảng khi không có sản phẩm bên trong -->
                                 <c:if test="${empty requestScope.listOrder}">
                                     <span class="message warn center-screen">
                                         You currently have no orders.
@@ -85,31 +63,160 @@
                                         Shopping Now
                                     </a>
                                 </c:if>
+
+                                <c:set var="hasProcessing" value="false"/>
+                                <c:set var="hasShipping" value="false"/>
+                                <c:set var="hasDelivered" value="false"/>
+                                <c:set var="hasCancelled" value="false"/>
+
+                                <c:forEach items="${requestScope.listOrder}" var="o">
+                                    <c:if test="${o.tracking eq 'processing'}">
+                                        <c:set var="hasProcessing" value="true"/>
+                                    </c:if>
+                                    <c:if test="${o.tracking eq 'shipping'}">
+                                        <c:set var="hasShipping" value="true"/>
+                                    </c:if>
+                                    <c:if test="${o.tracking eq 'delivered'}">
+                                        <c:set var="hasDelivered" value="true"/>
+                                    </c:if>
+                                    <c:if test="${o.tracking eq 'cancelled'}">
+                                        <c:set var="hasCancelled" value="true"/>
+                                    </c:if>
+                                </c:forEach>
+
+
                                 <c:if test="${not empty requestScope.listOrder}">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Full Name</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
-                                                <th>Payment</th>
-                                                <th>Total</th>
-                                                <th>Actions</th>	 	 	 	
-                                            </tr>
-                                        </thead>
-                                        <tbody>   
-                                            <c:forEach items="${requestScope.listOrder}" var="o">
+                                    <!-- Table processing -->
+                                    <c:if test="${hasProcessing}">
+                                        <table class="table">
+                                            <thead>
                                                 <tr>
-                                                    <td>${sessionScope.customer.cus_name}</td>
-                                                    <td>${o.order_date}</td>
-                                                    <td>${o.tracking}</td>
-                                                    <td>${o.payment_method}</td>
-                                                    <td>${o.total_price}</td>
-                                                    <td><a href="OrderDetail?id=${o.order_id != null ? o.order_id : ''}" class="view">View</a></td>
+                                                    <th>Full Name</th>
+                                                    <th>Date</th>
+                                                    <th>Status</th>
+                                                    <th>Payment</th>
+                                                    <th>Total</th>
+                                                    <th>Actions</th> 
                                                 </tr>
-                                            </c:forEach>  
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>   
+                                                <c:forEach items="${requestScope.listOrder}" var="o">                                
+                                                    <c:if test="${o.tracking eq 'processing'}">
+                                                        <tr>
+                                                            <td>${sessionScope.customer.cus_name}</td>
+                                                            <td>${o.order_date}</td>
+                                                            <td>${o.tracking}</td>
+                                                            <td>${o.payment_method}</td>
+                                                            <td>${o.total_price}</td>
+                                                            <td>
+                                                                <a href="OrderDetail?id=${o.order_id}" class="view">View</a>
+                                                                <c:if test="${o.tracking eq 'processing'}">
+                                                                    <a href="#" onclick="confirmCancel(event, '${o.order_id}')" class="cancel">Cancel</a>
+                                                                </c:if>
+                                                            </td>
+                                                        </tr>
+                                                    </c:if>
+                                                </c:forEach>  
+                                            </tbody>
+                                        </table>
+                                    </c:if>
+
+                                    <span class="message ${requestScope.messCancle} == null ? '' : 'successCancel' ">${requestScope.messCancle}</span>
+
+                                    <!-- Table Shipping -->
+                                    <c:if test="${hasShipping}">
+                                        <h3>Shipping</h3>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Full Name</th>
+                                                    <th>Date</th>
+                                                    <th>Status</th>
+                                                    <th>Payment</th>
+                                                    <th>Total</th>
+                                                    <th>Actions</th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody>   
+                                                <c:forEach items="${requestScope.listOrder}" var="o">
+                                                    <c:if test="${o.tracking eq 'shipping'}">
+                                                        <tr>
+                                                            <td>${sessionScope.customer.cus_name}</td>
+                                                            <td>${o.order_date}</td>
+                                                            <td>${o.tracking}</td>
+                                                            <td>${o.payment_method}</td>
+                                                            <td>${o.total_price}</td>
+                                                            <td><a href="OrderDetail?id=${o.order_id}" class="view">View</a></td>
+                                                        </tr>
+                                                    </c:if>
+                                                </c:forEach>  
+                                            </tbody>
+                                        </table>
+                                    </c:if>
+
+
+                                    <!-- Table delivered -->
+                                    <c:if test="${hasDelivered}">
+                                        <h3>Delivered</h3>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Full Name</th>
+                                                    <th>Date</th>
+                                                    <th>Status</th>
+                                                    <th>Payment</th>
+                                                    <th>Total</th>
+                                                    <th>Actions</th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody>   
+                                                <c:forEach items="${requestScope.listOrder}" var="o">
+                                                    <c:if test="${o.tracking eq 'delivered'}">
+                                                        <tr>
+                                                            <td>${sessionScope.customer.cus_name}</td>
+                                                            <td>${o.order_date}</td>
+                                                            <td>${o.tracking}</td>
+                                                            <td>${o.payment_method}</td>
+                                                            <td>${o.total_price}</td>
+                                                            <td><a href="OrderDetail?id=${o.order_id}" class="view">View</a></td>
+                                                        </tr>
+                                                    </c:if>
+                                                </c:forEach>  
+                                            </tbody>
+                                        </table>
+                                    </c:if>
+
+                                    <!-- Table Cancel -->
+                                    <c:if test="${hasCancelled}">
+                                        <h3>Canceled Orders</h3>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Full Name</th>
+                                                    <th>Date</th>
+                                                    <th>Status</th>
+                                                    <th>Payment</th>
+                                                    <th>Total</th>
+                                                    <th>Actions</th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody>   
+                                                <c:forEach items="${requestScope.listOrder}" var="o">
+                                                    <c:if test="${o.tracking eq 'cancelled'}">
+                                                        <tr>
+                                                            <td>${sessionScope.customer.cus_name}</td>
+                                                            <td>${o.order_date}</td>
+                                                            <td>${o.tracking}</td>
+                                                            <td>${o.payment_method}</td>
+                                                            <td>${o.total_price}</td>
+                                                            <td><a href="OrderDetail?id=${o.order_id}" class="view">View</a></td>
+                                                        </tr>
+                                                    </c:if>
+                                                </c:forEach>  
+                                            </tbody>
+                                        </table> 
+                                    </c:if>
+
                                 </c:if>
                             </div>
                         </div>
@@ -119,7 +226,13 @@
         </section>
         <!-- footer -->
         <jsp:include page="../common/layout/footer.jsp"></jsp:include>
-    </tbody>
-</table>
-</body>
+        <script>
+            function confirmCancel(event, orderId) {
+                event.preventDefault(); // Ngăn chặn chuyển hướng mặc định
+                if (confirm("Are you sure you want to cancel this order?")) {
+                    window.location.href = "Cancel?id=" + orderId; // 
+                }
+            }
+        </script>
+    </body>
 </html>

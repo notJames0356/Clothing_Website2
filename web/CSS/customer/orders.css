@@ -29,30 +29,59 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     text-decoration: none;
 }
 
-/* Style cho nút hành động */
-.table .view {
+/* CSS cho nút "View" */
+a.view {
     display: inline-block;
-    padding: 6px 12px;
-    background-color: #2d336b;
-    color: #ffffff;
+    padding: 8px 12px;
+    background-color: #007bff; /* Màu xanh */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+a.view:hover {
+    background-color: #0056b3; /* Màu xanh đậm khi hover */
+}
+
+/* CSS cho nút "Cancel" */
+a.cancel {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #dc3545; /* Màu đỏ */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+a.cancel:hover {
+    background-color: #a71d2a; /* Màu đỏ đậm khi hover */
+}
+
+/* CSS cho thông báo successCancel */
+.message.successCancel {
+    display: block;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #28a745; /* Màu xanh lá */
+    color: white;
+    border-radius: 5px;
+    text-align: center;
     font-weight: bold;
-    text-decoration: none;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.3s ease;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
-.table .view:hover {
-    background-color: #1f264e;
-    text-decoration: none;
+/* Hiệu ứng fade in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.table td {
-    white-space: nowrap;
-}
-
-.table .view + .view {
-    margin-left: 8px;
-}
 

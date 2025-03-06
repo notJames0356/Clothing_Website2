@@ -9,11 +9,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import shop.DAO.customer.orders.MyOrderDAO;
 import shop.DAO.customer.orders.MyOrderDetailDAO;
+import shop.model.Customer;
+import shop.model.Order;
 import shop.model.OrderDetail;
 import shop.model.Product;
 
@@ -39,9 +43,25 @@ public class OrderDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         MyOrderDetailDAO orderDetailsDao = new MyOrderDetailDAO();
-
+        MyOrderDAO orderDao = new MyOrderDAO();
+        HttpSession session = request.getSession();
+        Customer cus = (Customer) session.getAttribute("customer");
+        boolean checkOrderId = false;
+        
         int id = Integer.parseInt(request.getParameter("id"));
+        
+        for (Order order : orderDao.getListOrderByID(cus.getCus_id())) {
+            if (order.getOrder_id() == id) {
+                checkOrderId = true;
+                break;
+            }
+        }
 
+        if(!checkOrderId){
+            response.sendRedirect("Error");
+            return;
+        }
+        
         List<OrderDetail> listOrderDetail = orderDetailsDao.getListOrderDetail(id);
 
         Map<Integer, Product> listProduct = new HashMap<>();
