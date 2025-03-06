@@ -1,8 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="sidebar text-light p-3">
-    <h3 class="text-center">Shop Manager</h3>
+    <a href="home" style="color: whitesmoke; text-decoration: none"><h3 class="text-center">Shop Manager</h3></a>
     <div class="nav flex-column">
-        <a href="#" class="nav-link text-light p-3 border-0 rounded">
+        <a href="Dashboard" class="nav-link text-light p-3 border-0 rounded">
             <i class="bi bi-speedometer2"></i>Dashboard
         </a>
         <a href="accountHome" class="nav-link text-light p-3 border-0 rounded">

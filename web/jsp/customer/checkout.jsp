@@ -98,7 +98,9 @@
                         </label>
 
                     </div>
-                    <button type="submit">Order now</button>
+                    <c:if test="${sessionScope.admin.role.toLowerCase() != 'admin'}">
+                        <button type="submit">Order now</button>
+                    </c:if>
 
                 </form>
             </div>

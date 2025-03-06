@@ -20,12 +20,12 @@
     <body>
         <div class="d-flex h-100">
             <!-- Sidebar -->
-            <jsp:include page="../layout/managerSidebar.jsp"></jsp:include>
+             <jsp:include page="../common/layout/managerSidebar.jsp"></jsp:include>
 
                 <!-- Main Content -->
                 <div class="flex-grow-1">
                     <!-- Header -->
-                <jsp:include page="../layout/managerHeader.jsp"></jsp:include>
+                <jsp:include page="../common/layout/managerHeader.jsp"></jsp:include>
 
                 <!-- Content Area -->
                 <div class="content-area">

@@ -37,25 +37,27 @@
                                         <img style="border: 5px solid #2d336b; height: 255px" src="img/icon/header/user.png" width="100%">
                                     </li>
                                     <li><a href="#account-details" data-toggle="tab" class="nav-link active">Account Details</a></li>
+                                    <c:if test="${sessionScope.admin.role.toLowerCase() != 'admin'}">
                                     <li><a href="Order" class="nav-link">Orders</a></li>
-                                    <li><a href="ChangePassword" class="nav-link">Change Password</a></li>
-<!--                                    <li><a href="ChangePassword" data-toggle="tab" class="nav-link">Change Password</a></li>-->
-                                </ul>
-                            </div>    
-                        </div>
+                                    </c:if>
+                                <li><a href="ChangePassword" class="nav-link">Change Password</a></li>
+                                <!--                                    <li><a href="ChangePassword" data-toggle="tab" class="nav-link">Change Password</a></li>-->
+                            </ul>
+                        </div>    
+                    </div>
 
-                        <div class="col-sm-12 col-md-9 col-lg-9">
-                            <!-- Tab Content -->
-                            <div class="tab-content dashboard_content">
-                                <!-- Account Details -->
-                                <div class="tab-pane fade show active" id="account-details">
-                                    <h3>Account Details</h3>
-                                    <div class="login">
-                                        <div class="login_form_container">
-                                            <div class="account_login_form">
-                                                <form id="form-1" action="profile" method="POST">
-                                                    <label>Username</label>
-                                                    <input class="input_type" type="text" id="txtUserName" name="txtUserName" value="${sessionScope.customer.username}" readonly>
+                    <div class="col-sm-12 col-md-9 col-lg-9">
+                        <!-- Tab Content -->
+                        <div class="tab-content dashboard_content">
+                            <!-- Account Details -->
+                            <div class="tab-pane fade show active" id="account-details">
+                                <h3>Account Details</h3>
+                                <div class="login">
+                                    <div class="login_form_container">
+                                        <div class="account_login_form">
+                                            <form id="form-1" action="profile" method="POST">
+                                                <label>Username</label>
+                                                <input class="input_type" type="text" id="txtUserName" name="txtUserName" value="${sessionScope.customer.username}" readonly>
                                                 <label for="txtFullName">Full Name</label>
                                                 <input class="input_type " type="text"  id="txtFullName" name="txtFullName" value="${sessionScope.customer.cus_name}" readonly>               
                                                 <label for="txtEmail">Email</label>

@@ -37,7 +37,7 @@
                 border-radius: 8px;
                 text-decoration: none;
                 box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-                transition: all 0.3s ease-in-out;    
+                transition: all 0.3s ease-in-out;
             }
 
             /* Hiệu ứng khi hover vào nút */
@@ -63,18 +63,20 @@
                                         <img style="border: 5px solid #2d336b; height: 255px" src="img/icon/header/user.png" width="100%">
                                     </li>
                                     <li><a href="profile" class="nav-link">Account Details</a></li>
+                                    <c:if test="${sessionScope.admin.role.toLowerCase() != 'admin'}">
                                     <li><a href="Order" class="nav-link active">Orders</a></li>
-                                    <li><a href="ChangePassword" class="nav-link">Change Password</a></li>
-                                </ul>
-                            </div>    
-                        </div>
+                                    </c:if>
+                                <li><a href="ChangePassword" class="nav-link">Change Password</a></li>
+                            </ul>
+                        </div>    
+                    </div>
 
-                        <div class="col-sm-12 col-md-9 col-lg-9">
-                            <!-- Tab Content -->
-                            <div class="tab-content dashboard_content">
-                                <!-- Account Details -->
-                                <div class="tab-pane fade show active" id="account-details">
-                                    <h3>List Order</h3>
+                    <div class="col-sm-12 col-md-9 col-lg-9">
+                        <!-- Tab Content -->
+                        <div class="tab-content dashboard_content">
+                            <!-- Account Details -->
+                            <div class="tab-pane fade show active" id="account-details">
+                                <h3>List Order</h3>
                                 <c:if test="${empty requestScope.listOrder}">
                                     <span class="message warn center-screen">
                                         You currently have no orders.

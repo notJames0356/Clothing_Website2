@@ -77,6 +77,8 @@ public class SignupServlet extends HttpServlet {
             message = "Passwords do not match! Please re-enter!";
         } else if (!isValidPassword(passWord)) { // Check strong passwords
             message = "Password must be at least 8 characters, including uppercase and special characters!";
+        }else if (!isValidPhoneNumber(phone)){
+            message = "Your phone number is invalid! Please re-enter!";
         }
 
         if (message != null) {
@@ -103,6 +105,17 @@ public class SignupServlet extends HttpServlet {
     private boolean isValidPassword(String password) {
         String regex = "^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,}$";
         return Pattern.matches(regex, password);
+    }
+
+    public static boolean isValidPhoneNumber(String phoneNumber) {
+        // Kiểm tra nếu phoneNumber là null hoặc rỗng
+        if (phoneNumber == null || phoneNumber.isEmpty()) {
+            return false;
+        }
+
+        // Regex kiểm tra số điện thoại 10 chữ số, bắt đầu bằng số 0
+        String regex = "^0\\d{9}$";
+        return phoneNumber.matches(regex);
     }
 
 }

@@ -91,7 +91,11 @@ public class LoginServlet extends HttpServlet {
             response.addCookie(passWordCookie);
             response.addCookie(remCookie);
 
-            response.sendRedirect("home");
+            if (account.getRole().equalsIgnoreCase("admin")) {
+                response.sendRedirect("Dashboard");
+            } else {
+                response.sendRedirect("home");
+            }
         } else {
             String message = "Invalid username or password!";
             request.setAttribute("msg", message);
