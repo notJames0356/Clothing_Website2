@@ -68,24 +68,26 @@
                                         <img style="border: 5px solid #2d336b; height: 255px" src="img/icon/header/user.png" width="100%">
                                     </li>
                                     <li><a href="profile" class="nav-link">Account Details</a></li>
+                                    <c:if test="${sessionScope.admin.role.toLowerCase() != 'admin'}">
                                     <li><a href="Order" class="nav-link">Orders</a></li>
-                                    <li><a href="ChangePassword" class="nav-link active">Change Password</a></li>
-                                </ul>
-                            </div>    
-                        </div>
+                                    </c:if> 
+                                <li><a href="ChangePassword" class="nav-link active">Change Password</a></li>
+                            </ul>
+                        </div>    
+                    </div>
 
-                        <div class="col-sm-12 col-md-9 col-lg-9">
-                            <!-- Tab Content -->
-                            <div class="tab-content dashboard_content">
-                                <!-- Account Details -->
-                                <div class="tab-pane fade show active" id="account-details">
-                                    <h3>Change Password</h3>
-                                    <div class="login">
-                                        <div class="login_form_container">
-                                            <div class="account_login_form">
-                                                <form action="ChangePassword" method="POST">
-                                                    <label for="txtUserName">Username</label>
-                                                    <input type="text" id="txtUserName" name="txtUserName" value="${sessionScope.customer.username}" readonly>
+                    <div class="col-sm-12 col-md-9 col-lg-9">
+                        <!-- Tab Content -->
+                        <div class="tab-content dashboard_content">
+                            <!-- Account Details -->
+                            <div class="tab-pane fade show active" id="account-details">
+                                <h3>Change Password</h3>
+                                <div class="login">
+                                    <div class="login_form_container">
+                                        <div class="account_login_form">
+                                            <form action="ChangePassword" method="POST">
+                                                <label for="txtUserName">Username</label>
+                                                <input type="text" id="txtUserName" name="txtUserName" value="${sessionScope.customer.username}" readonly>
 
                                                 <label for="txtPassword">Enter Current Password</label>
                                                 <div class="input-group">
