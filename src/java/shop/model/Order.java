@@ -5,7 +5,9 @@
 package shop.model;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  *
@@ -19,6 +21,13 @@ public class Order {
     private String tracking;
     private Date order_date;
     private String payment_method;
+    private Customer customer;
+    
+
+    private static final NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
+
+    public Order() {
+    }
 
     public Order(int order_id, int cus_id, BigDecimal total_price, String tracking, Date order_date, String payment_method) {
         this.order_id = order_id;
@@ -77,9 +86,23 @@ public class Order {
         this.payment_method = payment_method;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public String getFormattedPrice() {
+        return formatter.format(total_price);
+    }
+
+   
+
     @Override
     public String toString() {
-        return "Order{" + "order_id=" + order_id + ", cus_id=" + cus_id + ", total_price=" + total_price + ", tracking=" + tracking + ", order_date=" + order_date + ", payment_method=" + payment_method + '}';
+        return "Order{" + "order_id=" + order_id + ", cus_id=" + cus_id + ", total_price=" + total_price + ", tracking=" + tracking + ", order_date=" + order_date + ", payment_method=" + payment_method + ", customer=" + customer + '}';
     }
 
 }
