@@ -151,8 +151,9 @@ public class OrderManagementDAO {
         java.util.Calendar cal = java.util.Calendar.getInstance();
         Date currentDate = cal.getTime();
         String currentDateStr = sdf.format(currentDate);
+        System.out.println("Current Date: " + currentDateStr);
 
-        switch (range.trim().toLowerCase()) {
+        switch (range.trim()) {
             case "all":
                 list.addAll(inputList); // Trả về toàn bộ danh sách
                 break;
@@ -166,18 +167,18 @@ public class OrderManagementDAO {
                         .collect(Collectors.toList());
                 break;
             case "last7Days":
-                // Lấy ngày 7 ngày trước (21/2/2025)
+                // Lấy ngày 7 ngày trước
                 cal.setTime(currentDate);
                 cal.add(java.util.Calendar.DATE, -7);
                 Date sevenDaysAgo = cal.getTime();
                 String sevenDaysAgoStr = sdf.format(sevenDaysAgo);
+                System.out.println("7 Days Ago: " + sevenDaysAgoStr);
 
                 list = inputList.stream()
                         .filter(o -> o != null && o.getOrder_date() != null)
                         .filter(o -> {
                             String orderDateStr = sdf.format(o.getOrder_date());
-                            return orderDateStr.contains(sevenDaysAgoStr)
-                                    || (orderDateStr.compareTo(sevenDaysAgoStr) > 0 && orderDateStr.compareTo(currentDateStr) <= 0);
+                            return (orderDateStr.compareTo(sevenDaysAgoStr) >= 0 && orderDateStr.compareTo(currentDateStr) <= 0);
                         })
                         .collect(Collectors.toList());
                 break;
@@ -186,18 +187,18 @@ public class OrderManagementDAO {
                 cal.add(java.util.Calendar.DATE, -30);
                 Date thirtyDaysAgo = cal.getTime();
                 String thirtyDaysAgoStr = sdf.format(thirtyDaysAgo);
+                System.out.println("30 Days Ago: " + thirtyDaysAgoStr);
 
                 list = inputList.stream()
                         .filter(o -> o != null && o.getOrder_date() != null)
                         .filter(o -> {
                             String orderDateStr = sdf.format(o.getOrder_date());
-                            return orderDateStr.contains(thirtyDaysAgoStr)
-                                    || (orderDateStr.compareTo(thirtyDaysAgoStr) > 0 && orderDateStr.compareTo(currentDateStr) <= 0);
+                            return (orderDateStr.compareTo(thirtyDaysAgoStr) >= 0 && orderDateStr.compareTo(currentDateStr) <= 0);
                         })
                         .collect(Collectors.toList());
                 break;
             default:
-                list.addAll(inputList); // Mặc định trả về toàn bộ danh sách nếu range không hợp lệ
+                list.addAll(new ArrayList<>()); // Mặc định trả về danh sách rỗng nếu range không hợp lệ
                 break;
         }
 
@@ -290,11 +291,10 @@ public class OrderManagementDAO {
 
     public static void main(String[] args) {
         OrderManagementDAO dao = new OrderManagementDAO();
-        List<Order> o = dao.getOrdersByTimeRange(dao.getAllOrders(), "today");
+        List<Order> o = dao.getOrdersByTimeRange(dao.getAllOrders(), "last30Days");
         List<OrderDetail> n = dao.getOrderDetails(18);
 
-        String ok = dao.updateOrderStatus(20, "processing");
-        System.out.println(ok);
+        System.out.println(o);
 
     }
 

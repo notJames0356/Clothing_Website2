@@ -52,8 +52,8 @@
                                     <option selected disabled="true">Sort by</option>
                                     <option value="newest">Date (Newest)</option>
                                     <option value="oldest">Date (Oldest)</option>
-                                    <option value="price_asc">Price (High to Low)</option>
-                                    <option value="price_desc">Price (Low to High)</option>
+                                    <option value="price_desc">Price (High to Low)</option>
+                                    <option value="price_asc">Price (Low to High)</option>
                                 </select>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
             <!-- Update Modal -->
             <div id="updateModal" class="modal">
                 <div class="modal-content">
-                    
+
                     <div id="updateContent"></div>
                     <button id="confirmUpdate" class="btn btn-primary mt-3">Update</button>
                 </div>
